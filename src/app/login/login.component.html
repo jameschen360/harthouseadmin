@@ -1,0 +1,36 @@
+<div class="main-content">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+  <div class="container-fluid text-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header" data-background-color="red">
+          <div class="header header-primary text-center">
+            <h3>Hart House Login</h3>
+          </div>
+        </div>
+        <div class="card-content">
+          <form [formGroup]="loginForm">
+            <div class="content">
+              <p style="color: #db5959;" *ngIf="errorLoginMsg">Invalid Login</p>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">face</i>
+                </span>
+                <input type="text" class="form-control" placeholder="First Name..." formControlName="username">
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">lock_outline</i>
+                </span>
+                <input type="password" placeholder="Password..." class="form-control" formControlName="password">
+              </div>
+            </div>
+            <div class=" text-center">
+              <button class="btn btn-danger" [disabled]="!loginForm.valid" (click)="onSignIn()">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
