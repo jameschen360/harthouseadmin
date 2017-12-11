@@ -1,36 +1,13 @@
-<div class="main-content">
+<div class="container col-lg-6 text-center" style="padding-top: 10%;">
+  <div class="card card-container text-center">
     <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
-  <div class="container-fluid text-center">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header" data-background-color="red">
-          <div class="header header-primary text-center">
-            <h3>Hart House Login</h3>
-          </div>
-        </div>
-        <div class="card-content">
-          <form [formGroup]="loginForm">
-            <div class="content">
-              <p style="color: #db5959;" *ngIf="errorLoginMsg">Invalid Login</p>
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <i class="material-icons">face</i>
-                </span>
-                <input type="text" class="form-control" placeholder="First Name..." formControlName="username">
-              </div>
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <i class="material-icons">lock_outline</i>
-                </span>
-                <input type="password" placeholder="Password..." class="form-control" formControlName="password">
-              </div>
-            </div>
-            <div class=" text-center">
-              <button class="btn btn-danger" [disabled]="!loginForm.valid" (click)="onSignIn()">Login</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    <h3>Hart House Login</h3>
+    <form class="form-signin" [formGroup]="loginForm">
+      <p style="color: #db5959;" *ngIf="errorLoginMsg">Invalid Login</p>
+      <input type="email" id="inputEmail" class="form-control" placeholder="Username" required autofocus formControlName="username">
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required formControlName="password">
+      <button class="btn btn-lg btn-primary btn-block btn-signin" [disabled]="!loginForm.valid" (click)="onSignIn()" style="cursor: pointer;">Sign in</button>
+    </form>
   </div>
+  <p class="profile-name-card">Simple Webs Calgary 2017</p>
 </div>
