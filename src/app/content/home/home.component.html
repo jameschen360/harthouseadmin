@@ -1,3 +1,4 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
 <div class="main-content">
   <div class="container-fluid">
 
@@ -11,44 +12,21 @@
       </div>
       <div class="card-content">
         <div class="row">
-          <div class="col-md-2 col-sm-2 col-xs-4" style="margin-top: -10px;">
-            <button class="btn btn-warning">Add Banner Picture</button>
+          <div class="" style="margin-top: -10px; padding-left: 14px;">
+            <label class="btn btn-warning">
+              <input type="file" style="display: none;" (change)="uploadFile($event)" /> Upload Banner Picture
+            </label>
+
           </div>
         </div>
-
         <div class="row">
-          <div class="container col-lg-3 col-md-6 col-sm-6 col-xs-6">
-            <img src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg" alt="Avatar" class="image" style="width:100%">
+          <div class="container col-lg-3 col-md-6 col-sm-6 col-xs-6" *ngFor="let image of bannerImagePath">
+            <img src="{{ image.url }}" alt="Avatar" class="image" style="width:100%">
             <div class="middle">
-              <button class="btn btn-danger">Remove</button>
-            </div>
-          </div>
-          <div class="container col-lg-3 col-md-6 col-sm-6 col-xs-6">
-            <img src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg" alt="Avatar" class="image" style="width:100%">
-            <div class="middle">
-              <button class="btn btn-danger">Remove</button>
-            </div>
-          </div>
-          <div class="container col-lg-3 col-md-6 col-sm-6 col-xs-6">
-            <img src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg" alt="Avatar" class="image" style="width:100%">
-            <div class="middle">
-              <button class="btn btn-danger">Remove</button>
-            </div>
-          </div>
-          <div class="container col-lg-3 col-md-6 col-sm-6 col-xs-6">
-            <img src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg" alt="Avatar" class="image" style="width:100%">
-            <div class="middle">
-              <button class="btn btn-danger">Remove</button>
-            </div>
-          </div>
-          <div class="container col-lg-3 col-md-6 col-sm-6 col-xs-6">
-            <img src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg" alt="Avatar" class="image" style="width:100%">
-            <div class="middle">
-              <button class="btn btn-danger">Remove</button>
+              <button id="banner_{{ image.id }}" class="btn btn-danger">Remove</button>
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -70,16 +48,16 @@
         </div>
       </div>
       <div class="card-content">
-          <div class="form-group form-black label-floating is-empty">
-            <label class="control-label">Video Title</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group form-black label-floating is-empty" style="padding-bottom: 15px;">
-            <label class="control-label">Video URL</label>
-            <input type="text" class="form-control">
-          </div>
-          <div id="summernote" class="col-md-12">Hello Summernote</div>
-          <button class="btn btn-warning">Save</button>
+        <div class="form-group form-black label-floating is-empty">
+          <label class="control-label">Video Title</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group form-black label-floating is-empty" style="padding-bottom: 15px;">
+          <label class="control-label">Video URL</label>
+          <input type="text" class="form-control">
+        </div>
+        <div id="summernote" class="col-md-12">Hello Summernote</div>
+        <button class="btn btn-warning">Save</button>
       </div>
     </div>
 

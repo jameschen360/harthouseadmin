@@ -1,3 +1,4 @@
+import { FetchService } from './service/fetch-service';
 import { ParallaxComponent } from './content/parallax/parallax.component';
 import { ReservationComponent } from './content/reservation/reservation.component';
 import { NewsComponent } from './content/news/news.component';
@@ -50,7 +51,6 @@ import { CweventComponent } from 'app/content/cwevent/cwevent.component';
     CweventComponent,
     ReservationComponent,
     ParallaxComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -66,7 +66,8 @@ import { CweventComponent } from 'app/content/cwevent/cwevent.component';
     AuthPreventLoginPage,
     AuthGuard,
     LoginService,
-    AuthLogout
+    AuthLogout,
+    FetchService
   ],
   bootstrap: [AppComponent]
 })

@@ -10,6 +10,7 @@ declare var $: any;
 @Injectable()
 export class LoginService {
   token: string;
+  user_id: string;
   responseData;
   errorLoginMsg = false;
   loginAPIURI = 'https://harthousewineandtapa.com/ngtest/login/';
@@ -28,10 +29,12 @@ export class LoginService {
           resolve(res.json());
           this.responseData = res.json();
           this.token = res.json().token;
+          this.user_id = res.json().user_id;
           sessionStorage.clear();
           if (this.token != null) {
             sessionStorage.setItem('userData', JSON.stringify(res.json()));
             sessionStorage.setItem('token', this.token);
+            sessionStorage.setItem('user_id', this.user_id);
           } else {
             this.errorLoginMsg = true;
           }

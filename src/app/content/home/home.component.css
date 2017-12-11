@@ -97,3 +97,17 @@
   font-size: 16px;
   padding: 16px 32px;
 }
+
+.custom-file-upload {
+  border: 1px solid rgb(255, 186, 129);
+  color: #ffffff;
+  border-radius: 2px;
+  background-color: #fa9f54;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.custom-file-upload:hover {
+  background-color: #fdba83;
+  box-shadow: 1px 1px #e0e0e0;
+}
