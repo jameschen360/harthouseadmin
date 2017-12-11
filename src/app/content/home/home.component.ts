@@ -78,13 +78,19 @@ export class HomeComponent implements OnInit {
       confirmButtonText: 'Yes!'
 
     }).then(() => {
-      // this.getData.postData(this.markAsDeliveredData, 'markAsDelivered').then((result) => {
 
+      const formData = event.target.files[0];
+      const newImageBannerJson = {
+        id: sessionStorage.user_id,
+        token: sessionStorage.token,
+        imageFile: formData
+      };
 
-      // }, (err) => {
-      //     // show some error
-      //     console.log(err);
-      // });
+      this.authService.postData(newImageBannerJson, 'newImageBanner').then((result) => {
+        console.log(result);
+      }, (err) => {
+
+      });
     }, (dismiss) => {
       if (dismiss === 'cancel') {
         this.loading = false;
