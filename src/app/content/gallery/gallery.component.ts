@@ -10,11 +10,9 @@ import { GALLERY_LIST } from '../mocks/gallery.mocks';
 export class GalleryComponent implements OnInit {
 
   imageList: Gallery[];
-  constructor() { 
+  constructor() {
     this.imageList = GALLERY_LIST;
   }
-
-  
 
   ngOnInit() {
   }
