@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   public toggleStatusText = 'Disabled';
   public loading = false;
   public responseData;
+  public bannerImagePath;
 
   userCredentials = {
     id: sessionStorage.user_id,
@@ -46,7 +47,7 @@ export class HomeComponent implements OnInit {
   initializeHomePage() {
     this.authService.postData(this.userCredentials, 'homePageInitialize').then((result) => {
       this.responseData = result;
-      console.log(this.responseData);
+      this.bannerImagePath = this.responseData.url_path;
     }, (err) => {
     });
   }

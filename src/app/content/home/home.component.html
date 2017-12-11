@@ -13,46 +13,20 @@
       <div class="card-content">
         <div class="row">
           <div class="" style="margin-top: -10px; padding-left: 14px;">
-            <label class="custom-file-upload btn">
+            <label class="btn btn-warning">
               <input type="file" style="display: none;" (change)="uploadFile($event)" /> Upload Banner Picture
             </label>
 
           </div>
         </div>
-
         <div class="row">
-          <div class="container col-lg-3 col-md-6 col-sm-6 col-xs-6">
-            <img src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg" alt="Avatar" class="image" style="width:100%">
+          <div class="container col-lg-3 col-md-6 col-sm-6 col-xs-6" *ngFor="let image of bannerImagePath">
+            <img src="{{ image.url }}" alt="Avatar" class="image" style="width:100%">
             <div class="middle">
-              <button class="btn btn-danger">Remove</button>
-            </div>
-          </div>
-          <div class="container col-lg-3 col-md-6 col-sm-6 col-xs-6">
-            <img src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg" alt="Avatar" class="image" style="width:100%">
-            <div class="middle">
-              <button class="btn btn-danger">Remove</button>
-            </div>
-          </div>
-          <div class="container col-lg-3 col-md-6 col-sm-6 col-xs-6">
-            <img src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg" alt="Avatar" class="image" style="width:100%">
-            <div class="middle">
-              <button class="btn btn-danger">Remove</button>
-            </div>
-          </div>
-          <div class="container col-lg-3 col-md-6 col-sm-6 col-xs-6">
-            <img src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg" alt="Avatar" class="image" style="width:100%">
-            <div class="middle">
-              <button class="btn btn-danger">Remove</button>
-            </div>
-          </div>
-          <div class="container col-lg-3 col-md-6 col-sm-6 col-xs-6">
-            <img src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg" alt="Avatar" class="image" style="width:100%">
-            <div class="middle">
-              <button class="btn btn-danger">Remove</button>
+              <button id="banner_{{ image.id }}" class="btn btn-danger">Remove</button>
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
