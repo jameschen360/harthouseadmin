@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Gallery } from '../models/gallery.interface';
+import { GALLERY_LIST } from '../mocks/gallery.mocks';
 
 @Component({
   selector: 'app-gallery',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GalleryComponent implements OnInit {
 
-  constructor() { }
+  imageList: Gallery[];
+  constructor() { 
+    this.imageList = GALLERY_LIST;
+  }
+
+  
 
   ngOnInit() {
   }
-
 }
