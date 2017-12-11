@@ -22,12 +22,12 @@
                   </tr>
               </thead>
               <tbody>
-                <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+                <ngx-loading [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
                   <tr *ngFor="let imageInfo of imageList">
                       <td #orderID><img src="{{ imageInfo.imageURL }}"></td>
                       <td>{{ imageInfo.imageURL }}</td>
                       <td>{{ imageInfo.order }}</td>
-                      <td><button mat-raised-button color="warn" id="orderNumber_{{order.id}}" (click)="viewDeliveredModal(orderID)">View</button></td>
+                      <td><button mat-raised-button color="warn">View</button></td>
                   </tr>
               </tbody>
           </table>
