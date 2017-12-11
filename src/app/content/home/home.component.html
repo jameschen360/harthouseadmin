@@ -1,3 +1,4 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
 <div class="main-content">
   <div class="container-fluid">
 
@@ -11,8 +12,11 @@
       </div>
       <div class="card-content">
         <div class="row">
-          <div class="col-md-2 col-sm-2 col-xs-4" style="margin-top: -10px;">
-            <button class="btn btn-warning">Add Banner Picture</button>
+          <div class="" style="margin-top: -10px; padding-left: 14px;">
+            <label class="custom-file-upload btn">
+              <input type="file" style="display: none;" (change)="uploadFile($event)" /> Upload Banner Picture
+            </label>
+
           </div>
         </div>
 
@@ -70,16 +74,16 @@
         </div>
       </div>
       <div class="card-content">
-          <div class="form-group form-black label-floating is-empty">
-            <label class="control-label">Video Title</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group form-black label-floating is-empty" style="padding-bottom: 15px;">
-            <label class="control-label">Video URL</label>
-            <input type="text" class="form-control">
-          </div>
-          <div id="summernote" class="col-md-12">Hello Summernote</div>
-          <button class="btn btn-warning">Save</button>
+        <div class="form-group form-black label-floating is-empty">
+          <label class="control-label">Video Title</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group form-black label-floating is-empty" style="padding-bottom: 15px;">
+          <label class="control-label">Video URL</label>
+          <input type="text" class="form-control">
+        </div>
+        <div id="summernote" class="col-md-12">Hello Summernote</div>
+        <button class="btn btn-warning">Save</button>
       </div>
     </div>
 
