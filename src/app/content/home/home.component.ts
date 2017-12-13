@@ -1,7 +1,10 @@
-import { FetchService } from '../../service/fetch-service';
-import { Component, OnInit } from '@angular/core';
 
+import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
+
+import { FetchService } from '../../service/fetch-service';
 import swal from 'sweetalert2';
+
 
 declare var $;
 
@@ -13,16 +16,17 @@ declare var $;
 export class HomeComponent implements OnInit {
   public isVideoEnabled = false;
   public toggleStatusText = 'Disabled';
-  public loading = false;
+  public bannerLoading = false;
   public responseData;
   public bannerImagePath;
+  public s3AWSImagePath;
 
   userCredentials = {
     id: sessionStorage.user_id,
     token: sessionStorage.token
   };
 
-  constructor( private authService: FetchService) {
+  constructor(private authService: FetchService, public http: Http) {
     $(document).ready(function () {
       $('#summernote').summernote({
         placeholder: 'Please write a reason here...',
@@ -63,8 +67,6 @@ export class HomeComponent implements OnInit {
   }
 
   uploadFile(event) {
-    this.loading = true;
-    console.log(event.target.files[0]);
     swal({
       allowOutsideClick: false,
       allowEscapeKey: false,
@@ -75,27 +77,80 @@ export class HomeComponent implements OnInit {
       showLoaderOnConfirm: true,
       confirmButtonColor: '#ffb606',
       cancelButtonColor: '#e87164',
-      confirmButtonText: 'Yes!'
+      confirmButtonText: 'Yes!',
+      preConfirm: (email) => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve();
+          }, 1000);
+        });
+      },
 
     }).then(() => {
+      this.bannerLoading = true;
+      const formData = new FormData();
+      formData.append('image_data', event.target.files[0]);
+      formData.append('user_id', sessionStorage.user_id);
+      formData.append('token', sessionStorage.token);
 
-      const formData = event.target.files[0];
-      const newImageBannerJson = {
-        id: sessionStorage.user_id,
-        token: sessionStorage.token,
-        imageFile: formData
-      };
+      this.http.post('https://harthousewineandtapa.com/ngtest/admin/bannerFileUpload.php', formData)
+        .map(response => response.json()).subscribe(
+        result => {
+          this.bannerLoading = false;
+          const response = result;
+          this.bannerImagePath.push(response.image_data);
+          if (response.msg === 'success') {
+            this.showNotification('success');
+          } else {
+            this.showNotification('danger');
+          }
+        },
+        error => {
+          console.log(error);
+        });
 
-      this.authService.postData(newImageBannerJson, 'newImageBanner').then((result) => {
-        console.log(result);
-      }, (err) => {
-
-      });
     }, (dismiss) => {
       if (dismiss === 'cancel') {
-        this.loading = false;
+        swal(
+          'Cancelled',
+          'You didn\'t upload anything!',
+          'error'
+        );
+        this.bannerLoading = false;
       }
     });
   }
+
+  showNotification(type) {
+    if (type === 'success') {
+      $.notify({
+          icon: 'notifications',
+          message: 'Banner image upload success!'
+
+      }, {
+          type: type,
+          timer: 4000,
+          placement: {
+              from: 'top',
+              align: 'center'
+          }
+      });
+    } else {
+      $.notify({
+        icon: 'notifications',
+        message: 'Something went wrong!'
+
+    }, {
+        type: type,
+        timer: 4000,
+        placement: {
+            from: 'top',
+            align: 'center'
+        }
+    });
+    }
+}
+
+
 
 }
