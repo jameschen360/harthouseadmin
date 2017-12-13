@@ -2,8 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { FetchService } from '../../service/fetch-service';
+import { FrontFetchService } from '../../service/fetch-service';
 import swal from 'sweetalert2';
+import { NotificationService } from 'app/service/notification.service';
 
 
 declare var $;
@@ -32,7 +33,7 @@ export class HomeComponent implements OnInit {
     bannerID: ''
   };
 
-  constructor(private authService: FetchService, public http: Http) {
+  constructor(private authService: FrontFetchService, public http: Http, private notification: NotificationService) {
     $(document).ready(function () {
       $('#summernote').summernote({
         placeholder: 'Please write a reason here...',
@@ -58,22 +59,44 @@ export class HomeComponent implements OnInit {
     const bannerDOM_ID = bannerDOM.id;
     const bannerID = bannerDOM_ID.split('_')[1];
     this.bannerRemove.bannerID = bannerID;
-
-    this.authService.postData(this.bannerRemove, 'bannerImageRemove').then((result) => {
-      this.responseData = result;
-      if (this.responseData.msg === 'success') {
-        $(document).ready(function () {
-          $('#' + bannerDOM_ID).closest('.container').fadeOut(1000);
+    swal({
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false,
+      title: 'Are you sure you want to delete this?',
+      type: 'question',
+      showCancelButton: true,
+      showLoaderOnConfirm: true,
+      confirmButtonColor: '#ffb606',
+      cancelButtonColor: '#e87164',
+      confirmButtonText: 'Yes!',
+      preConfirm: () => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve();
+          }, 400);
         });
-      } else {
-        this.showNotification('danger');
+      },
+    }).then(() => {
+      this.bannerLoading = true;
+      this.authService.postData(this.bannerRemove, 'bannerImageRemove').then((result) => {
+        this.responseData = result;
+        if (this.responseData.msg === 'success') {
+          $(document).ready(function () {
+            $('#' + bannerDOM_ID).closest('.container').fadeOut(600);
+          });
+        } else {
+          this.notification.showNotification('danger');
+        }
+        this.bannerLoading = false;
+      }, (err) => {
+      });
+    }, (dismiss) => {
+      if (dismiss === 'cancel') {
+        this.bannerLoading = false;
       }
-    }, (err) => {
     });
-
-
   }
-
 
   initializeHomePage() {
     this.authService.postData(this.userCredentials, 'homePageInitialize').then((result) => {
@@ -99,7 +122,7 @@ export class HomeComponent implements OnInit {
       allowEscapeKey: false,
       allowEnterKey: false,
       title: 'Are you sure you want to upload this?',
-      text: 'Please be mindful of the image dimention/size and how it will fit on the front page!',
+      text: 'Please be mindful of the image dimension/size and how it will fit on the front page!',
       type: 'question',
       showCancelButton: true,
       showLoaderOnConfirm: true,
@@ -113,7 +136,6 @@ export class HomeComponent implements OnInit {
           }, 1000);
         });
       },
-
     }).then(() => {
       this.bannerLoading = true;
       const formData = new FormData();
@@ -121,21 +143,19 @@ export class HomeComponent implements OnInit {
       formData.append('user_id', sessionStorage.user_id);
       formData.append('token', sessionStorage.token);
 
-      this.http.post('https://harthousewineandtapa.com/ngtest/admin/bannerFileUpload.php', formData)
-        .map(response => response.json()).subscribe(
-        result => {
-          this.bannerLoading = false;
-          const response = result;
-          this.bannerImagePath.push(response.image_data);
-          if (response.msg === 'success') {
-            this.showNotification('success');
-          } else {
-            this.showNotification('danger');
-          }
-        },
-        error => {
-          console.log(error);
-        });
+      this.authService.postDataFile(formData, 'bannerFileUpload.php').then((result) => {
+        this.responseData = result;
+        this.bannerLoading = false;
+        const response = result;
+        this.bannerImagePath.push(this.responseData.image_data);
+        if (this.responseData.msg === 'success') {
+          this.notification.showNotification('success');
+        } else {
+          this.notification.showNotification('danger');
+        }
+
+      }, (err) => {
+      });
 
     }, (dismiss) => {
       if (dismiss === 'cancel') {
@@ -148,37 +168,5 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-
-  showNotification(type) {
-    if (type === 'success') {
-      $.notify({
-        icon: 'notifications',
-        message: 'Banner image upload success!'
-
-      }, {
-          type: type,
-          timer: 4000,
-          placement: {
-            from: 'top',
-            align: 'center'
-          }
-        });
-    } else {
-      $.notify({
-        icon: 'notifications',
-        message: 'Something went wrong!'
-
-      }, {
-          type: type,
-          timer: 4000,
-          placement: {
-            from: 'top',
-            align: 'center'
-          }
-        });
-    }
-  }
-
-
 
 }
