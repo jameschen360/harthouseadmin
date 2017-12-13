@@ -23,7 +23,7 @@
           <div class="container col-lg-3 col-md-6 col-sm-6 col-xs-6" *ngFor="let image of bannerImagePath">
             <img src="{{ image.url }}" alt="Avatar" class="image" style="width:100%">
             <div class="middle">
-              <button id="banner_{{ image.id }}" class="btn btn-danger">Remove</button>
+              <button #bannerID id="banner_{{ image.id }}" class="btn btn-danger" (click)="removeBannerImage(bannerID)">Remove</button>
             </div>
           </div>
         </div>

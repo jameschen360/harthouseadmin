@@ -26,6 +26,12 @@ export class HomeComponent implements OnInit {
     token: sessionStorage.token
   };
 
+  bannerRemove = {
+    id: sessionStorage.user_id,
+    token: sessionStorage.token,
+    bannerID: ''
+  };
+
   constructor(private authService: FetchService, public http: Http) {
     $(document).ready(function () {
       $('#summernote').summernote({
@@ -47,6 +53,27 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  removeBannerImage(bannerDOM) {
+    const bannerDOM_ID = bannerDOM.id;
+    const bannerID = bannerDOM_ID.split('_')[1];
+    this.bannerRemove.bannerID = bannerID;
+
+    this.authService.postData(this.bannerRemove, 'bannerImageRemove').then((result) => {
+      this.responseData = result;
+      if (this.responseData.msg === 'success') {
+        $(document).ready(function () {
+          $('#' + bannerDOM_ID).closest('.container').fadeOut(1000);
+        });
+      } else {
+        this.showNotification('danger');
+      }
+    }, (err) => {
+    });
+
+
+  }
+
 
   initializeHomePage() {
     this.authService.postData(this.userCredentials, 'homePageInitialize').then((result) => {
@@ -72,6 +99,7 @@ export class HomeComponent implements OnInit {
       allowEscapeKey: false,
       allowEnterKey: false,
       title: 'Are you sure you want to upload this?',
+      text: 'Please be mindful of the image dimention/size and how it will fit on the front page!',
       type: 'question',
       showCancelButton: true,
       showLoaderOnConfirm: true,
@@ -124,32 +152,32 @@ export class HomeComponent implements OnInit {
   showNotification(type) {
     if (type === 'success') {
       $.notify({
-          icon: 'notifications',
-          message: 'Banner image upload success!'
+        icon: 'notifications',
+        message: 'Banner image upload success!'
 
       }, {
           type: type,
           timer: 4000,
           placement: {
-              from: 'top',
-              align: 'center'
+            from: 'top',
+            align: 'center'
           }
-      });
+        });
     } else {
       $.notify({
         icon: 'notifications',
         message: 'Something went wrong!'
 
-    }, {
-        type: type,
-        timer: 4000,
-        placement: {
+      }, {
+          type: type,
+          timer: 4000,
+          placement: {
             from: 'top',
             align: 'center'
-        }
-    });
+          }
+        });
     }
-}
+  }
 
 
 
