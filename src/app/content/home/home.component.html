@@ -1,4 +1,4 @@
-<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+<ngx-loading [show]="bannerLoading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
 <div class="main-content">
   <div class="container-fluid">
 
@@ -14,7 +14,7 @@
         <div class="row">
           <div class="" style="margin-top: -10px; padding-left: 14px;">
             <label class="btn btn-warning">
-              <input type="file" style="display: none;" (change)="uploadFile($event)" /> Upload Banner Picture
+              <input type="file" style="display: none;" onclick="this.value = null" accept="image/*" (change)="uploadFile($event)" /> Upload Banner Picture
             </label>
 
           </div>
