@@ -1,3 +1,46 @@
-<p>
-  aboutus works!
-</p>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card card-nav-tabs">
+      <div class="card-header" data-background-color="red">
+        <div class="nav-tabs-navigation">
+          <div class="nav-tabs-wrapper">
+            <ul class="nav nav-tabs" data-tabs="tabs">
+              <li class="active">
+                <a href="#aboutusblurb" data-toggle="tab">
+                  <i class="material-icons">format_align_justify</i>
+                  About Us Blurb
+                  <div class="ripple-container"></div>
+                </a>
+              </li>
+              <li class="">
+                <a href="#chef" data-toggle="tab">
+                  <i class="material-icons">face</i>
+                  Chef's Bio
+                  <div class="ripple-container"></div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-content">
+        <div class="tab-content">
+
+          <div class="tab-pane active" id="aboutusblurb">
+            <div id="aboutUs Title" class="form-group form-black label-floating is-empty">
+              <label class="control-label">About Us Title</label>
+              <input #aboutUsTitleSave type="text" class="form-control" value="{{ aboutUsTitle }}" formControlName="aboutUsTitle">
+            </div>
+            <div id="summernote" class="col-md-12" [innerHTML]="contentText"></div>
+            <button class="btn btn-warning" (click)="saveAboutUsContent(aboutUsTitleSave)">Save</button>
+          </div>
+
+          <div class="tab-pane" id="chef">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
