@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Gallery } from '../models/gallery.interface';
 import { GALLERY_LIST } from '../mocks/gallery.mocks';
-import { FrontFetchService } from '../../service/front-fetch.service';
+import { FrontFetchService } from 'app/service/fetch-service';
 
 @Component({
   selector: 'app-gallery',

@@ -29,8 +29,13 @@ import { TableListComponent } from './content/table-list/table-list.component';
 import { TypographyComponent } from './content/typography/typography.component';
 import { UpgradeComponent } from './content/upgrade/upgrade.component';
 import { UserProfileComponent } from './content/user-profile/user-profile.component';
+<<<<<<< HEAD
 import { FetchService } from './service/fetch-service';
 import { FrontFetchService } from './service/front-fetch.service';
+=======
+import { FrontFetchService } from 'app/service/fetch-service';
+import { NotificationService } from 'app/service/notification.service';
+>>>>>>> fc09ddad8aa467732f22f9a237cd45e6785d72c4
 
 @NgModule({
   declarations: [
@@ -68,8 +73,13 @@ import { FrontFetchService } from './service/front-fetch.service';
     AuthGuard,
     LoginService,
     AuthLogout,
+<<<<<<< HEAD
     FetchService,
     FrontFetchService
+=======
+    FrontFetchService,
+    NotificationService
+>>>>>>> fc09ddad8aa467732f22f9a237cd45e6785d72c4
   ],
   bootstrap: [AppComponent]
 })
