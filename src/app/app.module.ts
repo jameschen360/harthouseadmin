@@ -30,6 +30,7 @@ import { TypographyComponent } from './content/typography/typography.component';
 import { UpgradeComponent } from './content/upgrade/upgrade.component';
 import { UserProfileComponent } from './content/user-profile/user-profile.component';
 import { FetchService } from './service/fetch-service';
+import { FrontFetchService } from './service/front-fetch.service';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { FetchService } from './service/fetch-service';
     AuthGuard,
     LoginService,
     AuthLogout,
-    FetchService
+    FetchService,
+    FrontFetchService
   ],
   bootstrap: [AppComponent]
 })
