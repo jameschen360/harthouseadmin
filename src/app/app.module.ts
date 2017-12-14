@@ -31,6 +31,7 @@ import { UpgradeComponent } from './content/upgrade/upgrade.component';
 import { UserProfileComponent } from './content/user-profile/user-profile.component';
 import { FrontFetchService } from 'app/service/fetch-service';
 import { NotificationService } from 'app/service/notification.service';
+import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { NotificationService } from 'app/service/notification.service';
     RouterModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    LoadingModule
+    LoadingModule,
+    DragulaModule
   ],
   providers: [
     AuthPreventLoginPage,

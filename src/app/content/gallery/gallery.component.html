@@ -1,17 +1,81 @@
 <div class="main-content">
-<div class="container-fluid">
+  <div class="container-fluid">
 
-  <div class="panel-body table-responsive table-panel">
-    
-    <div class="card">
-      <div class="card-header" data-background-color="red">
-        <div class="row">
-          <div class="col-md-10 col-sm-10 col-xs-8">
-            <h4 class="title">Home Page Banner</h4>
+    <div class="panel-body table-responsive table-panel">
+
+      <div class="card">
+        <div class="card-header" data-background-color="red">
+          <div class="row">
+            <div class="col-md-10 col-sm-10 col-xs-8">
+              <h4 class="title">Gallery Page Photos</h4>
+            </div>
           </div>
         </div>
-      </div>
-        <div style="padding:20px 20px 20px 20px">
+
+
+        <div class="card-content">
+          <div class="row">
+            <div class="" style="margin-top: -10px; padding-left: 14px;">
+              <label class="btn btn-warning">
+                <input type="file" style="display: none;" onclick="this.value = null" accept="image/*" (change)="uploadFile($event)" /> Upload Gallery Picture
+              </label>
+
+            </div>
+          </div>
+          <div class="row">
+            
+              <div class='wrapper'>
+                  <div class="container card" [dragula]='"bag1"'>
+                      <div class="container col-lg-3 col-md-6 col-sm-12 col-xs-12 grabbable" *ngFor="let image of imageList"> 
+                          <img src="{{ image.imageURL }}" alt="Avatar" class="image" style="width:100%">
+                          <div class="middle">
+                            <p *ngIf="!editOrder; else saveCancel"></p>
+                            <ng-template #saveCancel>
+                              <input class="form-control" type="number" [(ngModel)]="image.order" value="{{ image.order }}">
+                              <button class="btn btn-danger" (click)="editOrderNumber()">Save</button>
+                            </ng-template>
+            
+                            <p *ngIf="editOrder; else editInfo"></p>
+                            <ng-template #editInfo>
+                              <button class="btn btn-danger" (click)="editOrderChange()">Edit</button>
+                            </ng-template>
+            
+                            <button class="btn btn-danger" #bannerID id="banner_{{ image.order }}" class="btn btn-danger" (click)="removeGalleryImage(bannerID)">Remove</button>
+            
+                          </div>
+                        </div>
+                  </div>
+                </div>
+
+                <!-- THIS IS WHERE THE PICTURE LOOP STARTS -->
+            <!-- <div class="container col-lg-3 col-md-6 col-sm-12 col-xs-12" *ngFor="let image of imageList"> 
+              <img src="{{ image.imageURL }}" alt="Avatar" class="image" style="width:100%">
+              <div class="middle">
+                <p *ngIf="!editOrder; else saveCancel"></p>
+                <ng-template #saveCancel>
+                  <input class="form-control" type="number" [(ngModel)]="image.order" value="{{ image.order }}">
+                  <button class="btn btn-danger" (click)="editOrderNumber()">Save</button>
+                </ng-template>
+
+                <p *ngIf="editOrder; else editInfo"></p>
+                <ng-template #editInfo>
+                  <button class="btn btn-danger" (click)="editOrderChange()">Edit</button>
+                </ng-template>
+
+                <button class="btn btn-danger" #bannerID id="banner_{{ image.order }}" class="btn btn-danger" (click)="removeGalleryImage(bannerID)">Remove</button>
+
+              </div>
+            </div> -->
+
+
+          </div>
+        </div>
+
+
+
+
+
+        <!-- <div style="padding:20px 20px 20px 20px">
           <table id="deliveredTable" class="table table-striped table-bordered table-hover" style="padding:20px 20px 20px 20px">
               <thead>
                   <tr>
@@ -42,10 +106,10 @@
                   </tr>
               </tbody>
           </table>
-        </div>
-    </div>
-    
-  </div>
+        </div> -->
+      </div>
 
-</div>
+    </div>
+
+  </div>
 </div>
