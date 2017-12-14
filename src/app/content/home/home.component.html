@@ -47,17 +47,20 @@
           </div>
         </div>
       </div>
-      <div class="card-content">
-        <div class="form-group form-black label-floating is-empty">
-          <label class="control-label">Video Title</label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="form-group form-black label-floating is-empty" style="padding-bottom: 15px;">
-          <label class="control-label">Video URL</label>
-          <input type="text" class="form-control">
-        </div>
-        <div id="summernote" class="col-md-12">Hello Summernote</div>
-        <button class="btn btn-warning">Save</button>
+      <div class="card-content" style="position: relative;">
+        <ngx-loading [show]="videoContentLoading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+        <form [formGroup]="videoContentForm">
+          <div id="videoTitle" class="form-group form-black label-floating is-empty">
+            <label class="control-label">Video Title</label>
+            <input #videoTitleSave type="text" class="form-control" value="{{ videoTitle }}" formControlName="videoTitle">
+          </div>
+          <div id="videoURL" class="form-group form-black label-floating is-empty" style="padding-bottom: 15px;">
+            <label class="control-label">Video URL</label>
+            <input #videoURLSave type="text" class="form-control" value="{{ videoURL }}" formControlName="videoURL">
+          </div>
+          <div id="summernote" class="col-md-12" [innerHTML]="contentText"></div>
+          <button class="btn btn-warning" (click)="saveVideoContent(videoTitleSave, videoURLSave)">Publish Content</button>
+        </form>
       </div>
     </div>
 
