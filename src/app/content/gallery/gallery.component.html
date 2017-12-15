@@ -23,32 +23,32 @@
             </div>
           </div>
           <div class="row">
-            
-              <div class='wrapper'>
-                  <div class="container card" [dragula]='"bag1"'>
-                      <div class="container col-lg-3 col-md-6 col-sm-12 col-xs-12 grabbable" *ngFor="let image of imageList"> 
-                          <img src="{{ image.imageURL }}" alt="Avatar" class="image" style="width:100%">
-                          <div class="middle">
-                            <p *ngIf="!editOrder; else saveCancel"></p>
-                            <ng-template #saveCancel>
-                              <input class="form-control" type="number" [(ngModel)]="image.order" value="{{ image.order }}">
-                              <button class="btn btn-danger" (click)="editOrderNumber()">Save</button>
-                            </ng-template>
-            
-                            <p *ngIf="editOrder; else editInfo"></p>
-                            <ng-template #editInfo>
-                              <button class="btn btn-danger" (click)="editOrderChange()">Edit</button>
-                            </ng-template>
-            
-                            <button class="btn btn-danger" #bannerID id="banner_{{ image.order }}" class="btn btn-danger" (click)="removeGalleryImage(bannerID)">Remove</button>
-            
-                          </div>
-                        </div>
+
+            <div class='wrapper'>
+              <div class="container card" [dragula]='"bag1"'>
+                <div class="container col-lg-3 col-md-6 col-sm-12 col-xs-12 grabbable" *ngFor="let image of imageList" style="height:350px; overflow: hidden;">
+                  <img src="{{ image.imageURL }}" alt="Avatar" class="image">
+                  <div class="middle">
+                    <p *ngIf="!editOrder; else saveCancel"></p>
+                    <ng-template #saveCancel>
+                      <input class="form-control" type="number" [(ngModel)]="image.order" value="{{ image.order }}">
+                      <button class="btn btn-danger" (click)="editOrderNumber()">Save</button>
+                    </ng-template>
+
+                    <p *ngIf="editOrder; else editInfo"></p>
+                    <ng-template #editInfo text-align: bottom;>
+                      <button class="btn btn-danger" (click)="editOrderChange()" style="bottom: 0;">Edit</button>
+                    </ng-template>
+
+                    <button class="btn btn-danger" #bannerID id="banner_{{ image.order }}" class="btn btn-danger" (click)="removeGalleryImage(bannerID)" style="bottom: 0;">Remove</button>
+
                   </div>
                 </div>
+              </div>
+            </div>
 
-                <!-- THIS IS WHERE THE PICTURE LOOP STARTS -->
-            <!-- <div class="container col-lg-3 col-md-6 col-sm-12 col-xs-12" *ngFor="let image of imageList"> 
+            <!-- THIS IS WHERE THE PICTURE LOOP STARTS -->
+            <!-- <div class="container col-lg-3 col-mzd-6 col-sm-12 col-xs-12" *ngFor="let image of imageList"> 
               <img src="{{ image.imageURL }}" alt="Avatar" class="image" style="width:100%">
               <div class="middle">
                 <p *ngIf="!editOrder; else saveCancel"></p>
