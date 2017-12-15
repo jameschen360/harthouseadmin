@@ -15,7 +15,7 @@ export class NotificationService {
 
       }, {
           type: type,
-          timer: 4000,
+          timer: 2000,
           placement: {
             from: 'top',
             align: 'center'
@@ -28,7 +28,7 @@ export class NotificationService {
 
       }, {
           type: type,
-          timer: 4000,
+          timer: 2000,
           placement: {
             from: 'top',
             align: 'center'
@@ -41,7 +41,7 @@ export class NotificationService {
 
       }, {
           type: type,
-          timer: 4000,
+          timer: 2000,
           placement: {
             from: 'top',
             align: 'center'
@@ -64,7 +64,7 @@ export class NotificationService {
 
     }, {
         type: this.type,
-        timer: 4000,
+        timer: 2000,
         placement: {
           from: 'top',
           align: 'center'
@@ -87,7 +87,7 @@ export class NotificationService {
 
     }, {
         type: this.type,
-        timer: 4000,
+        timer: 2000,
         placement: {
           from: 'top',
           align: 'center'
@@ -103,7 +103,7 @@ export class NotificationService {
 
     }, {
         type: 'success',
-        timer: 4000,
+        timer: 2000,
         placement: {
           from: 'top',
           align: 'center'
@@ -119,7 +119,7 @@ export class NotificationService {
 
     }, {
         type: 'success',
-        timer: 4000,
+        timer: 2000,
         placement: {
           from: 'top',
           align: 'center'
@@ -135,7 +135,7 @@ export class NotificationService {
 
     }, {
         type: 'success',
-        timer: 4000,
+        timer: 2000,
         placement: {
           from: 'top',
           align: 'center'
@@ -151,7 +151,7 @@ export class NotificationService {
 
     }, {
         type: 'danger',
-        timer: 4000,
+        timer: 2000,
         placement: {
           from: 'top',
           align: 'center'
