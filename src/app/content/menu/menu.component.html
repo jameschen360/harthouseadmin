@@ -1,13 +1,39 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div>
-      <div class='wrapper'>
-        <div class="container card" [dragula]='"bag1"'>
-          <div class="card col-lg-4">This is the default use case. You only need to specify the containers you want to use</div>
-          <div class="card col-lg-4">More interactive use cases lie ahead</div>
-          <div class="card col-lg-4">Make sure to check out the
-            <a href='https://github.com/bevacqua/dragula#readme'>documentation on GitHub!</a>
+    <div class="card card-nav-tabs" style="position: relative;">
+      <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+      <div class="card-header" data-background-color="red">
+        <div class="nav-tabs-navigation">
+          <div class="nav-tabs-wrapper">
+            <ul class="nav nav-tabs" data-tabs="tabs">
+              <li class="active">
+                <a style="cursor: pointer" data-toggle="tab" (click)="foodMenuSelector()">
+                  Food Menu
+                  <div class="ripple-container"></div>
+                </a>
+              </li>
+              <li class="">
+                <a style="cursor: pointer" data-toggle="tab" (click)="drinkMenuSelector()">
+                  Drink Menu
+                  <div class="ripple-container"></div>
+                </a>
+              </li>
+            </ul>
           </div>
+        </div>
+      </div>
+      <div class="card-content">
+        <div class="row">
+          <div class="col-md-4">
+            <label class="btn btn-warning">
+              <input type="file" style="display: none;" onclick="this.value = null" accept="application/pdf" (change)="uploadFile($event)"
+              />{{ buttonText }}
+            </label>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <h3>Preview:</h3>
+          <pdf-viewer [src]="pdfSrc" [original-size]="false" [render-text]="false" style="display: block;"></pdf-viewer>
         </div>
       </div>
     </div>

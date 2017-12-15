@@ -50,6 +50,49 @@ export class NotificationService {
     }
   }
 
+  showNotificationPDF(type) {
+    if (type === 'success') {
+      $.notify({
+        icon: 'notifications',
+        message: 'Pdf upload success!'
+
+      }, {
+          type: type,
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    } else if (type === 'danger') {
+      $.notify({
+        icon: 'notifications',
+        message: 'Something went wrong!'
+
+      }, {
+          type: type,
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    } else if (type === 'warning') {
+      $.notify({
+        icon: 'notifications',
+        message: 'Pdf Deleted!'
+
+      }, {
+          type: type,
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    }
+  }
+
   videoToggleNotification(status) {
     if (status) {
       this.messageNotify = 'Video Content has been enabled';

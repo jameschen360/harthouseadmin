@@ -32,6 +32,7 @@ import { UserProfileComponent } from './content/user-profile/user-profile.compon
 import { FrontFetchService } from 'app/service/fetch-service';
 import { NotificationService } from 'app/service/notification.service';
 import { DragulaModule } from 'ng2-dragula';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { DragulaModule } from 'ng2-dragula';
     AppRoutingModule,
     ReactiveFormsModule,
     LoadingModule,
-    DragulaModule
+    DragulaModule,
+    PdfViewerModule
   ],
   providers: [
     AuthPreventLoginPage,
