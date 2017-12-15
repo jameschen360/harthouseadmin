@@ -4,40 +4,74 @@
       <div class="card-header" data-background-color="red">
         <div class="nav-tabs-navigation">
           <div class="nav-tabs-wrapper">
-            <ul class="nav nav-tabs" data-tabs="tabs">
-              <li class="active">
-                <a href="#aboutusblurb" data-toggle="tab">
-                  <i class="material-icons">format_align_justify</i>
-                  About Us Blurb
-                  <div class="ripple-container"></div>
-                </a>
-              </li>
-              <li class="">
-                <a href="#chef" data-toggle="tab">
-                  <i class="material-icons">face</i>
-                  Chef's Bio
-                  <div class="ripple-container"></div>
-                </a>
-              </li>
-            </ul>
+            <div class="row">
+              <div class="col-md-10 col-sm-10 col-xs-8">
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="active">
+                    <a href="#aboutusblurb" data-toggle="tab" (click)="aboutBlurbLink()">
+                      <i class="material-icons">format_align_justify</i>
+                      About Us Blurb
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="">
+                    <a href="#chef" data-toggle="tab" (click)="chefLink()">
+                      <i class="material-icons">face</i>
+                      Chef's Bio
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-2 col-sm-2 col-xs-4">
+                <div *ngIf="chefBioPressed">
+                  <label class="switch">
+                    <input type="checkbox" [checked]="isChefEnabled" (click)="chefCheckBox()">
+                    <span class="slider round"></span>
+                  </label>
+                  <div style="padding-left: 7px; margin-top: -12px;">
+                    <p>{{ toggleStatusText }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="card-content">
+      <div class="card-content" style="position: relative;">
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
         <div class="tab-content">
-
           <div class="tab-pane active" id="aboutusblurb">
-            <div id="aboutUs Title" class="form-group form-black label-floating is-empty">
+            <div id="aboutUsTitle" class="form-group form-black label-floating is-empty">
               <label class="control-label">About Us Title</label>
-              <input #aboutUsTitleSave type="text" class="form-control" value="{{ aboutUsTitle }}" formControlName="aboutUsTitle">
+              <input #aboutUsTitleSave type="text" class="form-control" value="{{ aboutUsTitle }}">
             </div>
-            <div id="summernote" class="col-md-12" [innerHTML]="contentText"></div>
-            <button class="btn btn-warning" (click)="saveAboutUsContent(aboutUsTitleSave)">Save</button>
+            <div id="summernote" class="col-md-12" [innerHTML]="aboutUsContent"></div>
+            <button class="btn btn-warning" (click)="saveAboutUs(aboutUsTitleSave)">Save</button>
           </div>
 
           <div class="tab-pane" id="chef">
+            <div class="container text-center">
+              <img class="round-image image" [src]="chefPictureURL" />
+              <div class="middle">
+                <label class="btn btn-warning">
+                  <input type="file" style="display: none;" onclick="this.value = null" accept="image/*" (change)="uploadFile($event)" /> Edit Image
+                </label>
+              </div>
+            </div>
 
+            <div id="chefName" class="form-group form-black label-floating is-empty">
+              <label class="control-label">Chef Name</label>
+              <input #chefNameSave type="text" class="form-control" value="{{ chefName }}">
+            </div>
+            <div id="chefTitle" class="form-group form-black label-floating is-empty">
+              <label class="control-label">Exerpt Title</label>
+              <input #chefTitleSave type="text" class="form-control" value="{{ chefTitle }}">
+            </div>
+
+            <div id="summernote2" class="col-md-12" [innerHTML]="chefContent"></div>
+            <button class="btn btn-warning" (click)="saveChefBio(chefNameSave, chefTitleSave)">Save</button>
           </div>
         </div>
       </div>

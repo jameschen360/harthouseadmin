@@ -73,6 +73,29 @@ export class NotificationService {
 
   }
 
+  chefToggleNotification(status) {
+    if (status) {
+      this.messageNotify = 'Chef profile has been enabled';
+      this.type = 'success';
+    } else {
+      this.messageNotify = 'Chef profile has been disabled';
+      this.type = 'danger';
+    }
+    $.notify({
+      icon: 'notifications',
+      message: this.messageNotify
+
+    }, {
+        type: this.type,
+        timer: 4000,
+        placement: {
+          from: 'top',
+          align: 'center'
+        }
+      });
+
+  }
+
   videoSave() {
     $.notify({
       icon: 'notifications',
@@ -87,6 +110,53 @@ export class NotificationService {
         }
       });
 
+  }
+
+  aboutUsSave() {
+    $.notify({
+      icon: 'notifications',
+      message: 'About Us content saved!'
+
+    }, {
+        type: 'success',
+        timer: 4000,
+        placement: {
+          from: 'top',
+          align: 'center'
+        }
+      });
+
+  }
+
+  chefSave() {
+    $.notify({
+      icon: 'notifications',
+      message: 'Chef Content Saved!'
+
+    }, {
+        type: 'success',
+        timer: 4000,
+        placement: {
+          from: 'top',
+          align: 'center'
+        }
+      });
+
+  }
+
+  error() {
+    $.notify({
+      icon: 'notifications',
+      message: 'Error.'
+
+    }, {
+        type: 'danger',
+        timer: 4000,
+        placement: {
+          from: 'top',
+          align: 'center'
+        }
+      });
   }
 
 

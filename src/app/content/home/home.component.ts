@@ -145,7 +145,7 @@ export class HomeComponent implements OnInit {
       // initialize summer note after everything has been rendered and get from db
       $(document).ready(function () {
         $('#summernote').summernote({
-          placeholder: 'Please write a reason here...',
+          placeholder: 'Please write here...',
           minHeight: 250,             // set minimum height of editor
           maxHeight: null,             // set maximum height of editor
           focus: true,
