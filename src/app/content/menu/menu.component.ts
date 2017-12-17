@@ -16,6 +16,7 @@ export class MenuComponent implements OnInit {
   responseData;
   drinkMenu;
   foodMenu;
+  pageLoading = true;
   userCredentials = {
     id: sessionStorage.user_id,
     token: sessionStorage.token
@@ -36,7 +37,7 @@ export class MenuComponent implements OnInit {
       this.drinkMenu = this.responseData.drink.menu_url;
       this.foodMenu = this.responseData.food.menu_url;
       this.pdfSrc = this.foodMenu;
-
+      this.pageLoading = false;
     }, (err) => {
     });
   }

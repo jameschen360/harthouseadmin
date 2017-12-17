@@ -26,6 +26,7 @@ import { ReservationComponent } from 'app/content/reservation/reservation.compon
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [AuthPreventLoginPage] },
+  { path: 'content', redirectTo: 'content/dashboard' },
   { path: 'content', component: ContentComponent, canActivate: [AuthGuard], children: [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'home', component: HomeComponent },
@@ -43,7 +44,7 @@ const routes: Routes = [
     { path: 'notifications', component: NotificationsComponent },
     { path: 'upgrade', component: UpgradeComponent },
   ]},
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+  { path: '**', redirectTo: 'content/dashboard' },
 ];
 
 @NgModule({

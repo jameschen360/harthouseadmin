@@ -11,7 +11,11 @@ import { ContentComponent } from 'app/content/content.component';
 import { CweventComponent } from 'app/content/cwevent/cwevent.component';
 import { HomeComponent } from 'app/content/home/home.component';
 import { LoginComponent } from 'app/login/login.component';
+import { FrontFetchService } from 'app/service/fetch-service';
 import { LoginService } from 'app/service/login.service';
+import { NotificationService } from 'app/service/notification.service';
+import { DragulaModule } from 'ng2-dragula';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { LoadingModule } from 'ngx-loading';
 
 import { AppComponent } from './app.component';
@@ -29,10 +33,6 @@ import { TableListComponent } from './content/table-list/table-list.component';
 import { TypographyComponent } from './content/typography/typography.component';
 import { UpgradeComponent } from './content/upgrade/upgrade.component';
 import { UserProfileComponent } from './content/user-profile/user-profile.component';
-import { FrontFetchService } from 'app/service/fetch-service';
-import { NotificationService } from 'app/service/notification.service';
-import { DragulaModule } from 'ng2-dragula';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -65,7 +65,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     ReactiveFormsModule,
     LoadingModule,
     DragulaModule,
-    PdfViewerModule
+    PdfViewerModule,
   ],
   providers: [
     AuthPreventLoginPage,

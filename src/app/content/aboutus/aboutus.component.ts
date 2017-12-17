@@ -13,7 +13,7 @@ declare var $;
   templateUrl: './aboutus.component.html',
   styleUrls: ['./aboutus.component.css']
 })
-export class AboutusComponent implements OnInit {
+export class AboutusComponent implements OnInit{
   responseData;
   aboutUsTitle;
   aboutUsContent;
@@ -26,6 +26,7 @@ export class AboutusComponent implements OnInit {
   loading;
   toggleStatusText;
   isChefEnabled;
+  pageLoading = true;
 
   userCredentials = {
     id: sessionStorage.user_id,
@@ -54,6 +55,13 @@ export class AboutusComponent implements OnInit {
   };
 
   constructor(private authService: FrontFetchService, public http: Http, private notification: NotificationService) {
+    this.aboutUsInitialize();
+  }
+
+  ngOnInit() {
+  }
+
+  aboutUsInitialize() {
     this.authService.postData(this.userCredentials, 'aboutUsInitialize').then((result) => {
       this.responseData = result;
       this.aboutUsTitle = this.responseData.aboutUs.title;
@@ -106,11 +114,10 @@ export class AboutusComponent implements OnInit {
           ],
         });
       });
+
+      this.pageLoading = false;
     }, (err) => {
     });
-  }
-
-  ngOnInit() {
   }
 
   chefCheckBox() {

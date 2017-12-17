@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   videoContentForm: FormGroup;
   public isVideoEnabled = false;
   public toggleStatusText = 'Disabled';
-  public bannerLoading = false;
+  public bannerLoading = true;
   public videoContentLoading = false;
 
   public responseData;
@@ -157,6 +157,8 @@ export class HomeComponent implements OnInit {
           ],
         });
       });
+
+      this.bannerLoading = false;
     }, (err) => {
     });
   }
