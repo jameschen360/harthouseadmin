@@ -1,5 +1,59 @@
+<ngx-loading [show]="pageLoading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
 <div class="main-content">
   <div class="container-fluid">
-    
+    <!-- News Feed -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header" data-background-color="red">
+          <h4 class="title">News Posts</h4>
+        </div>
+        <div class="card-content table-responsive">
+          <button class="btn btn-warning" (click)="addNewsModal()">Add News</button>
+          <div #newsID id="{{ news.id }}" class="blog-card" *ngFor="let news of newsInit">
+            <i class="material-icons pull-right" style="cursor: pointer; padding: 5px; position: relative;" (click)="removeNews(newsID)">clear</i>
+            <div class="description">
+              <h1>{{ news.title }}</h1>
+              <hr>
+              <h2>{{ news.date }}</h2>
+              <p>{{ news.content }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
+
+<!-- Modal for add new news -->
+<div class="remodal" data-remodal-id="addNewsModal" data-remodal-options="hashTracking: false" style="position: relative;">
+  <ngx-loading [show]="modalLoading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+  <button data-remodal-action="close" class="remodal-close"></button>
+  <h2>Post some news!</h2>
+  <form [formGroup]="addNewsForm">
+    <div class="text-left">
+      <div class="col-md-12">
+        <div class="form-group form-black label-floating is-empty">
+          <label class="control-label">News Title</label>
+          <input type="text" class="form-control" formControlName="newsTitle">
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>News Content</label>
+          <div class="form-group form-black label-floating is-empty">
+            <label class="control-label"> Write news here...</label>
+            <textarea class="form-control" rows="4" formControlName="newsContent"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <button class="btn btn-success" (click)="addNews()" [disabled]="!addNewsForm.valid">Add News</button>
+      </div>
+      <div class="text-right col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <button data-remodal-action="cancel" class="btn btn-info">Cancel</button>
+      </div>
+    </div>
+  </form>
 </div>

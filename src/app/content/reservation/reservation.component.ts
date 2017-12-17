@@ -118,6 +118,7 @@ export class ReservationComponent implements OnInit {
         });
       },
     }).then(() => {
+      $('[data-remodal-id=reservationModal]').remodal().close();
       this.modalLoading = true;
       this.authService.postData(this.reservationData, 'deleteReservation').then((result) => {
         $(() => {
