@@ -15,10 +15,52 @@
 
     <div class="nav-container">
         <ul class="nav">
-            <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
-                <a [routerLink]="[menuItem.path]">
-                    <i class="material-icons">{{menuItem.icon}}</i>
-                    <p>{{menuItem.title}}</p>
+            <li routerLinkActive="active" >
+                <a routerLink="/content/dashboard">
+                    <i class="material-icons"></i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <li routerLinkActive="active" >
+                <a routerLink="/content/reservation">
+                    <i class="material-icons"></i>
+                    <p>Reservations</p>
+                </a>
+            </li>
+            <li routerLinkActive="active" >
+                <a routerLink="/content/home">
+                    <i class="material-icons"></i>
+                    <p>Home Page</p>
+                </a>
+            </li>
+            <li routerLinkActive="active" >
+                <a routerLink="/content/aboutus">
+                    <i class="material-icons"></i>
+                    <p>About Us Page</p>
+                </a>
+            </li>
+            <li routerLinkActive="active" >
+                <a routerLink="/content/news">
+                    <i class="material-icons"></i>
+                    <p>News Page</p>
+                </a>
+            </li>
+            <li routerLinkActive="active">
+                <a routerLink="/content/cwevent">
+                    <i class="material-icons"></i>
+                    <p>C/W Page</p>
+                </a>
+            </li>
+            <li routerLinkActive="active" >
+                <a routerLink="/content/gallery">
+                    <i class="material-icons"></i>
+                    <p>Gallery Page</p>
+                </a>
+            </li>
+            <li routerLinkActive="active" >
+                <a routerLink="/content/parallax">
+                    <i class="material-icons"></i>
+                    <p>Parallax</p>
                 </a>
             </li>
         </ul>

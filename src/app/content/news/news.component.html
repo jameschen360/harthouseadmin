@@ -26,7 +26,7 @@
 
 <!-- Modal for add new news -->
 <div class="remodal" data-remodal-id="addNewsModal" data-remodal-options="hashTracking: false" style="position: relative;">
-  <ngx-loading [show]="modalLoading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+  <ngx-loading [show]="pageLoading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
   <button data-remodal-action="close" class="remodal-close"></button>
   <h2>Post some news!</h2>
   <form [formGroup]="addNewsForm">

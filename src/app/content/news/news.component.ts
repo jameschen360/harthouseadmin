@@ -32,7 +32,7 @@ export class NewsComponent implements OnInit {
   newsInit;
   addNewsForm: FormGroup;
 
-  constructor(private authService: FrontFetchService, private notification: NotificationService) { 
+  constructor(private authService: FrontFetchService, private notification: NotificationService) {
     this.newsPageInitialize();
     this.addNewsForm = new FormGroup({
       'newsTitle': new FormControl(null, [Validators.required]),

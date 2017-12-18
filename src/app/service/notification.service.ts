@@ -136,6 +136,49 @@ export class NotificationService {
     }
   }
 
+  cweventSaveEditNotification(type) {
+    if (type === 'success') {
+      $.notify({
+        icon: 'notifications',
+        message: 'Information was saved!'
+
+      }, {
+          type: type,
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    } else if (type === 'danger') {
+      $.notify({
+        icon: 'notifications',
+        message: 'Information was deleted!'
+
+      }, {
+          type: type,
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    } else if (type === 'warning') {
+      $.notify({
+        icon: 'notifications',
+        message: 'Something went wrong!'
+
+      }, {
+          type: type,
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    }
+  }
+
   videoToggleNotification(status) {
     if (status) {
       this.messageNotify = 'Video Content has been enabled';
