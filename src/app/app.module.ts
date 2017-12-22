@@ -23,27 +23,15 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './content/components/components.module';
 import { DashboardComponent } from './content/dashboard/dashboard.component';
 import { GalleryComponent } from './content/gallery/gallery.component';
-import { IconsComponent } from './content/icons/icons.component';
 import { MenuComponent } from './content/menu/menu.component';
 import { NewsComponent } from './content/news/news.component';
-import { NotificationsComponent } from './content/notifications/notifications.component';
 import { ParallaxComponent } from './content/parallax/parallax.component';
 import { ReservationComponent } from './content/reservation/reservation.component';
-import { TableListComponent } from './content/table-list/table-list.component';
-import { TypographyComponent } from './content/typography/typography.component';
-import { UpgradeComponent } from './content/upgrade/upgrade.component';
-import { UserProfileComponent } from './content/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    UserProfileComponent,
-    TableListComponent,
-    TypographyComponent,
-    IconsComponent,
-    NotificationsComponent,
-    UpgradeComponent,
     ContentComponent,
     LoginComponent,
     HomeComponent,

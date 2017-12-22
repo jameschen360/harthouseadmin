@@ -170,3 +170,7 @@
         max-width: 1400px !important;
     }
   }
+
+/deep/ .swal2-container {
+  z-index: 10001 !important;
+}
