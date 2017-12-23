@@ -15,7 +15,7 @@ export class NotificationService {
 
       }, {
           type: type,
-          timer: 4000,
+          timer: 2000,
           placement: {
             from: 'top',
             align: 'center'
@@ -28,7 +28,7 @@ export class NotificationService {
 
       }, {
           type: type,
-          timer: 4000,
+          timer: 2000,
           placement: {
             from: 'top',
             align: 'center'
@@ -41,7 +41,136 @@ export class NotificationService {
 
       }, {
           type: type,
-          timer: 4000,
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    }
+  }
+
+  showNotificationPDF(type) {
+    if (type === 'success') {
+      $.notify({
+        icon: 'notifications',
+        message: 'Pdf upload success!'
+
+      }, {
+          type: type,
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    } else if (type === 'danger') {
+      $.notify({
+        icon: 'notifications',
+        message: 'Something went wrong!'
+
+      }, {
+          type: type,
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    } else if (type === 'warning') {
+      $.notify({
+        icon: 'notifications',
+        message: 'Pdf Deleted!'
+
+      }, {
+          type: type,
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    }
+  }
+
+  reservationNotification(type) {
+    if (type === 'success') {
+      $.notify({
+        icon: 'notifications',
+        message: 'Reservation was confirmed and an email was sent!'
+
+      }, {
+          type: type,
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    } else if (type === 'danger') {
+      $.notify({
+        icon: 'notifications',
+        message: 'Reservation data was deleted!'
+
+      }, {
+          type: type,
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    } else if (type === 'warning') {
+      $.notify({
+        icon: 'notifications',
+        message: 'Something went wrong!'
+
+      }, {
+          type: type,
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    }
+  }
+
+  cweventSaveEditNotification(type) {
+    if (type === 'success') {
+      $.notify({
+        icon: 'notifications',
+        message: 'Information was saved!'
+
+      }, {
+          type: type,
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    } else if (type === 'danger') {
+      $.notify({
+        icon: 'notifications',
+        message: 'Information was deleted!'
+
+      }, {
+          type: type,
+          timer: 2000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    } else if (type === 'warning') {
+      $.notify({
+        icon: 'notifications',
+        message: 'Something went wrong!'
+
+      }, {
+          type: type,
+          timer: 2000,
           placement: {
             from: 'top',
             align: 'center'
@@ -64,7 +193,7 @@ export class NotificationService {
 
     }, {
         type: this.type,
-        timer: 4000,
+        timer: 2000,
         placement: {
           from: 'top',
           align: 'center'
@@ -87,7 +216,7 @@ export class NotificationService {
 
     }, {
         type: this.type,
-        timer: 4000,
+        timer: 2000,
         placement: {
           from: 'top',
           align: 'center'
@@ -126,7 +255,7 @@ export class NotificationService {
 
     }, {
         type: 'success',
-        timer: 4000,
+        timer: 2000,
         placement: {
           from: 'top',
           align: 'center'
@@ -142,7 +271,7 @@ export class NotificationService {
 
     }, {
         type: 'success',
-        timer: 4000,
+        timer: 2000,
         placement: {
           from: 'top',
           align: 'center'
@@ -158,7 +287,7 @@ export class NotificationService {
 
     }, {
         type: 'success',
-        timer: 4000,
+        timer: 2000,
         placement: {
           from: 'top',
           align: 'center'
@@ -174,7 +303,7 @@ export class NotificationService {
 
     }, {
         type: 'danger',
-        timer: 4000,
+        timer: 2000,
         placement: {
           from: 'top',
           align: 'center'

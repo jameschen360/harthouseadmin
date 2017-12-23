@@ -33,6 +33,7 @@
     "jquery": "3.2.1",
     "moment": "2.18.1",
     "ng2-dragula": "^1.5.0",
+    "ng2-pdf-viewer": "^3.0.2",
     "ngx-loading": "^1.0.9",
     "ngx-order-pipe": "^1.1.1",
     "ngx-sweetalert2": "^0.2.5",

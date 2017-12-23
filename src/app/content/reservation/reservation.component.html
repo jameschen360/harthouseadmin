@@ -1,3 +1,115 @@
-<p>
-  reservation works!
-</p>
+<ngx-loading [show]="pageLoading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+<div class="main-content">
+  <div class="container-fluid">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+    <!-- Pending Reservation -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header" data-background-color="red">
+          <h4 class="title">Pending Reservation</h4>
+          <p class="category">All Pending Reservation</p>
+        </div>
+        <div class="card-content table-responsive">
+          <table class="table">
+            <thead class="text-danger">
+              <tr>
+                <th>Name</th>
+                <th>People</th>
+                <th>Time</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr #reservationID id="{{ pending.id }}" *ngFor="let pending of pendingReservations">
+                <td>{{ pending.full_name }}</td>
+                <td>{{ pending.people_number }}</td>
+                <td>{{ pending.date_time }}</td>
+                <td>
+                  <button class="btn btn-warning" (click)="reservationModal(reservationID)">View</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Accepted Reservation -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header" data-background-color="red">
+          <h4 class="title">Recent Approved Reservation</h4>
+          <p class="category">All Recently Approved Reservation</p>
+        </div>
+        <div class="card-content table-responsive">
+          <table class="table">
+            <thead class="text-danger">
+              <tr>
+                <th>Name</th>
+                <th>People</th>
+                <th>Time</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr #reservationID id="{{ complete.id }}" *ngFor="let complete of completeReservations">
+                <td>{{ complete.full_name }}</td>
+                <td>{{ complete.people_number }}</td>
+                <td>{{ complete.date_time }}</td>
+                <td>
+                  <button class="btn btn-warning" (click)="reservationModal(reservationID)">View</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for reservation details -->
+<div class="remodal" data-remodal-id="reservationModal" data-remodal-options="hashTracking: false" style="position: relative;">
+    <ngx-loading [show]="modalLoading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+  <button data-remodal-action="close" class="remodal-close"></button>
+  <div class="text-left">
+    <h2>Reservation for {{ detailedReservationFullName }}</h2>
+    <hr>
+    <p>
+      <label>Date & Time:</label>
+      <span>
+        <strong>{{ detailedReservationDateTime }}</strong>
+      </span>
+    </p>
+    <p>
+      <label>Number of People:</label>
+      <span>
+        <strong>{{ detailedReservationPeople }}</strong>
+      </span>
+    </p>
+    <p>
+      <label>Email:</label>
+      <span>
+        <strong>{{ detailedReservationEmail }}</strong>
+      </span>
+    </p>
+    <p>
+      <label>Message:</label>
+      <span>
+        <strong>{{ detailedReservationMessage }}</strong>
+      </span>
+    </p>
+    <hr>
+  </div>
+  <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <button class="btn btn-success" data-remodal-action="confirm" *ngIf="detailedReservationStatus == 'pending'" (click)="approveReservation()">Confirm</button>
+      <button class="btn btn-danger" (click)="deleteReservation()">Delete</button>
+    </div>
+    <div class="text-right col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <button data-remodal-action="cancel" class="btn btn-info">Cancel</button>
+    </div>
+  </div>
+</div>

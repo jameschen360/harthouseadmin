@@ -1,3 +1,129 @@
-<p>
-  cwevent works!
-</p>
+<ngx-loading [show]="pageLoading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+<div class="main-content">
+  <div class="container-fluid">
+    <!-- cwevents Feed -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header" data-background-color="red">
+          <h4 class="title">Corporate and Wedding Event Infos</h4>
+        </div>
+        <div class="card-content table-responsive">
+          <button class="btn btn-warning" (click)="cweventNewModal()">Add Another Info</button>
+          <ul>
+            <li #cweventID id="cwevent_{{ cweventContent.id }}" *ngFor="let cweventContent of cwevents" class="col-md-12">
+              <div class="col-md-9">
+                <input type="checkbox" checked>
+                <i></i>
+                <h4>{{ cweventContent.title }}</h4>
+                <p [innerHTML]="cweventContent.content">
+                </p>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-danger btn-md" (click)="cweventEditModal(cweventID)">Edit</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for edit cwevents -->
+    <div class="remodal" data-remodal-id="cweventEditModal" data-remodal-options="hashTracking: false" style="position: relative;">
+      <ngx-loading [show]="pageLoading" [config]="{ backdropBorderRadius: '0px' }"></ngx-loading>
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <h2>Editing "<strong>{{ cweventTitleEdit }}</strong>"</h2>
+      <form [formGroup]="editCWeventForm">
+        <div class="text-left">
+          <div class="col-md-12">
+            <div id="cweventTitleEdit" class="form-group form-black label-floating is-empty">
+              <label class="control-label">C/W Event Title</label>
+              <input type="text" class="form-control" formControlName="cweventTitleEdit">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <div id="summernoteEventEdit" class="col-md-12 clearSummernote" [innerHTML]="cweventContentEdit"></div>
+            </div>
+          </div>
+
+          <h3>Preview</h3>
+
+          <div class="card" style="padding: 10px;">
+            <!-- Preview of edit cwevent -->
+            <ul style="padding: 15px;">
+              <li class="col-md-12" style="border-top: 0px !important;">
+                <input type="checkbox">
+                <i></i>
+                <h2 class="title">{{ editCWeventForm.value.cweventTitleEdit }}</h2>
+                <p [innerHTML]="cweventContentEdit">
+                </p>
+              </li>
+            </ul>
+            <br>
+
+          </div>
+        </div>
+
+        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <hr>
+          <div class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <button class="btn btn-success" (click)="saveCweventEdit()" [disabled]="!editCWeventForm.valid">Save Changes</button>
+            <button class="btn btn-danger" (click)="deleteCwevent()">Delete</button>
+          </div>
+          <div class="text-right col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <button data-remodal-action="cancel" class="btn btn-info">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Modal for add new cwevents -->
+    <div class="remodal" data-remodal-id="cweventNewModal" data-remodal-options="hashTracking: false" style="position: relative;">
+      <ngx-loading [show]="pageLoading" [config]="{ backdropBorderRadius: '0px' }"></ngx-loading>
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <h2>New Event Info</h2>
+      <form [formGroup]="newCWeventForm">
+        <div class="text-left">
+          <div class="col-md-12">
+            <div id="cweventTitleEdit" class="form-group form-black label-floating is-empty">
+              <label class="control-label">C/W Event Title</label>
+              <input type="text" class="form-control" formControlName="cweventTitleNew">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <div id="summernoteEventNew" class="col-md-12 clearSummernoteNew" [innerHTML]="cweventContentNew"></div>
+            </div>
+          </div>
+
+          <h3>Preview</h3>
+
+          <div class="card" style="padding: 10px;">
+            <!-- Preview of edit cwevent -->
+            <ul style="padding: 15px;">
+              <li class="col-md-12" style="border-top: 0px !important;">
+                <input type="checkbox">
+                <i></i>
+                <h2 class="title">{{ newCWeventForm.value.cweventTitleNew }}</h2>
+                <p [innerHTML]="newCWeventForm.value.cweventContentNew">
+                </p>
+              </li>
+            </ul>
+            <br>
+
+          </div>
+        </div>
+
+        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <hr>
+          <div class="text-left col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <button class="btn btn-success" (click)="addCwevent()" [disabled]="!newCWeventForm.valid">Save Changes</button>
+          </div>
+          <div class="text-right col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <button data-remodal-action="cancel" class="btn btn-info">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
