@@ -32,6 +32,8 @@ import { UserProfileComponent } from './content/user-profile/user-profile.compon
 import { FrontFetchService } from 'app/service/fetch-service';
 import { NotificationService } from 'app/service/notification.service';
 import { DragulaModule } from 'ng2-dragula';
+import { OrderModule } from 'ngx-order-pipe';
+
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { DragulaModule } from 'ng2-dragula';
     AppRoutingModule,
     ReactiveFormsModule,
     LoadingModule,
-    DragulaModule
+    DragulaModule,
+    OrderModule
   ],
   providers: [
     AuthPreventLoginPage,

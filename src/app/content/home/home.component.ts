@@ -71,6 +71,7 @@ export class HomeComponent implements OnInit {
     const bannerDOM_ID = bannerDOM.id;
     const bannerID = bannerDOM_ID.split('_')[1];
     this.bannerRemove.bannerID = bannerID;
+    console.log(this.bannerRemove);
     swal({
       allowOutsideClick: false,
       allowEscapeKey: false,
@@ -91,8 +92,10 @@ export class HomeComponent implements OnInit {
       },
     }).then(() => {
       this.bannerLoading = true;
+      
       this.authService.postData(this.bannerRemove, 'bannerImageRemove').then((result) => {
         this.responseData = result;
+        console.log(result);
         if (this.responseData.msg === 'success') {
           $(document).ready(function () {
             $('#' + bannerDOM_ID).closest('.container').fadeOut(600);

@@ -96,6 +96,29 @@ export class NotificationService {
 
   }
 
+  galleryRemoveNotification(status) {
+    if (status) {
+      // this.messageNotify = 'Gallery photo has been removed';
+      // this.type = 'danger';
+    } else {
+      this.messageNotify = 'Gallery photo has been removed';
+      this.type = 'success';
+      $.notify({
+        icon: 'notifications',
+        message: this.messageNotify
+      }, {
+          type: this.type,
+          timer: 4000,
+          placement: {
+            from: 'top',
+            align: 'center'
+          }
+        });
+    }
+
+
+  }
+
   videoSave() {
     $.notify({
       icon: 'notifications',

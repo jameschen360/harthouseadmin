@@ -1,4 +1,5 @@
 export interface Gallery {
-    imageURL: string;
-    order: number;
+    id: string;
+    url: string;
+    sort: string;
 }

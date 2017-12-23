@@ -19,6 +19,14 @@
               <label class="btn btn-warning">
                 <input type="file" style="display: none;" onclick="this.value = null" accept="image/*" (change)="uploadFile($event)" /> Upload Gallery Picture
               </label>
+              <div *ngIf="!editOrder">
+                <button class="btn btn-danger" (click)="editCheckBox()" style="bottom: 0;">Edit</button>
+              </div>
+              <div *ngIf="editOrder">
+                <button class="btn btn-danger" (click)="saveSort()">Save</button>
+                <button class="btn btn-danger" (click)="editCheckBox()">Cancel</button>
+              </div>
+              
 
             </div>
           </div>
@@ -26,22 +34,26 @@
 
             <div class='wrapper'>
               <div class="container card" [dragula]='"bag1"'>
-                <div class="container col-lg-3 col-md-6 col-sm-12 col-xs-12 grabbable" *ngFor="let image of imageList" style="height:350px; overflow: hidden;">
-                  <img src="{{ image.imageURL }}" alt="Avatar" class="image">
+                <div class="container col-lg-3 col-md-6 col-sm-12 col-xs-12 grabbable" *ngFor="let image of imageInfo" style="height:380px; width:350px; overflow: hidden;">
+                  <div style="height:320px; width:250px; overflow: hidden;">
+                    <div class="image-wrap" style="position: absolute; top: 50%; transform: translateY(-50%);">
+                      <img src="{{ image.url }}" alt="Avatar" class="image">
+                    </div>
+                  </div>
                   <div class="middle">
-                    <p *ngIf="!editOrder; else saveCancel"></p>
-                    <ng-template #saveCancel>
-                      <input class="form-control" type="number" [(ngModel)]="image.order" value="{{ image.order }}">
-                      <button class="btn btn-danger" (click)="editOrderNumber()">Save</button>
-                    </ng-template>
+                    <div id="divCheckbox" style="display: none;">
+                      <input class="imageId" id="imageId_{{ image.id }}" value="{{ image.id }}">
+                      <input class="imageUrl" value="{{ image.url }}">
+                      <input class="imageSort" value="{{ image.sort }}">
+                    </div>
 
-                    <p *ngIf="editOrder; else editInfo"></p>
-                    <ng-template #editInfo text-align: bottom;>
-                      <button class="btn btn-danger" (click)="editOrderChange()" style="bottom: 0;">Edit</button>
-                    </ng-template>
+                    <div *ngIf="editOrder">
+                      <div><input class="form-control" type="number" [(ngModel)]="image.sort" value="{{ image.sort }}" style="bottom: 0;"></div>
+                    </div>
 
-                    <button class="btn btn-danger" #bannerID id="banner_{{ image.order }}" class="btn btn-danger" (click)="removeGalleryImage(bannerID)" style="bottom: 0;">Remove</button>
-
+                    <div *ngIf="!editOrder">
+                      <button class="btn btn-danger" #galleryID id="gallery_{{ image.id }}" class="btn btn-danger" (click)="removeGalleryImage(galleryID)" style="bottom: 0;">Remove</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -113,3 +125,27 @@
 
   </div>
 </div>
+
+<script>
+$(document).ready(function() {
+  
+     var imageHeight, wrapperHeight, overlap, container = $('.image-wrap');  
+  
+     function centerImage() {
+         imageHeight = container.find('img').height();
+         wrapperHeight = container.height();
+         overlap = (wrapperHeight - imageHeight) / 2;
+         container.find('img').css('margin-top', overlap);
+     }
+      
+     $(window).on("load resize", centerImage);
+      
+     var el = document.getElementById('wrapper');
+     if (el.addEventListener) {  
+         el.addEventListener("webkitTransitionEnd", centerImage, false); // Webkit event
+         el.addEventListener("transitionend", centerImage, false); // FF event
+         el.addEventListener("oTransitionEnd", centerImage, false); // Opera event
+     }
+  
+});
+</script>

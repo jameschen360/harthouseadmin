@@ -201,7 +201,6 @@ export class AboutusComponent implements OnInit {
         } else {
           this.notification.showNotification('danger');
         }
-
       }, (err) => {
       });
 
