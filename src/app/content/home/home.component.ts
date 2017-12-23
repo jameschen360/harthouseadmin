@@ -118,6 +118,7 @@ export class HomeComponent implements OnInit {
     this.authService.postData(this.userCredentials, 'homePageInitialize').then((result) => {
       this.responseData = result;
       this.bannerImagePath = this.responseData.url_path;
+      console.log(this.bannerImagePath);
       this.videoTitle = this.responseData.videoContent.title;
       this.videoURL = this.responseData.videoContent.video_url;
       this.contentText = this.responseData.videoContent.content_text;
@@ -215,6 +216,7 @@ export class HomeComponent implements OnInit {
         this.bannerLoading = false;
         const response = result;
         this.bannerImagePath.push(this.responseData.image_data);
+        console.log(this.bannerImagePath);
         if (this.responseData.msg === 'success') {
           this.notification.showNotification('success');
         } else {

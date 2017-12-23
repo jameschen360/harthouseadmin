@@ -34,6 +34,7 @@ export class GalleryComponent implements OnInit {
   public bannerImagePath;
   public imageDataArray;
   public dataArray;
+  public pageLoading = true;
 
   toggleEdit = {
     id: sessionStorage.user_id,
@@ -63,21 +64,18 @@ export class GalleryComponent implements OnInit {
     this.getData.postData(this.postData, 'galleryPageInitialize').then((result) => {
       this.responseData = result;
       this.imageInfo = this.responseData.gallery;
+      this.bannerImagePath = this.responseData.gallery;
+      this.pageLoading = false;
 
-      for (let i = 0; i < this.responseData.gallery.length; i++) {
-        //this.responseData.gallery
-      }
     }, (err) => {
     });
   }
 
   removeGalleryImage(galleryDOM) {
+    this.pageLoading = true;
     const galleryDOM_ID = galleryDOM.id;
     const galleryID = galleryDOM_ID.split('_')[1];
-    console.log(galleryDOM_ID);
-    console.log(galleryID);
     this.galleryRemove.bannerID = galleryID;
-    console.log(this.galleryRemove);
     swal({
       allowOutsideClick: false,
       allowEscapeKey: false,
@@ -97,10 +95,9 @@ export class GalleryComponent implements OnInit {
         });
       },
     }).then(() => {
-      this.bannerLoading = true;
+      this.pageLoading = true;
       this.authService.postData(this.galleryRemove, 'galleryImageRemove').then((result) => {
         this.responseData = result;
-        console.log(result);
         if (this.responseData.msg === 'success') {
           $(document).ready(function () {
             $('#' + galleryDOM_ID).closest('.container').fadeOut(600);
@@ -109,45 +106,13 @@ export class GalleryComponent implements OnInit {
         } else {
           this.notification.showNotification('danger');
         }
-        this.bannerLoading = false;
+        this.pageLoading = false;
       }, (err) => {
       });
     }, (dismiss) => {
       if (dismiss === 'cancel') {
-        this.bannerLoading = false;
+        this.pageLoading = false;
       }
-    });
-  }
-
-  editCheckBox() {
-    this.toggleEdit.toggleStatus = !this.isEditEnabled;
-    this.authService.postData(this.toggleEdit, 'toggleVideo').then((result) => {
-      this.responseData = result;
-      if (this.isEditEnabled === true) {
-        this.isEditEnabled = false;
-        this.toggleStatusButton = 'Disabled';
-        this.toggleStatusInput = 'Disabled';
-        this.editOrder = true;
-      } else if (this.isEditEnabled === false) {
-        this.isEditEnabled = true;
-        this.toggleStatusButton = 'Enabled';
-        this.toggleStatusInput = 'Enabled';
-        this.editOrder = false;
-      }
-      this.notification.galleryRemoveNotification(this.isEditEnabled);
-
-      this.imageId = document.getElementsByClassName('imageId');
-      this.imageUrl = document.getElementsByClassName('imageUrl');
-      this.imageSort = document.getElementsByClassName('imageSort');
-      this.gallerySize = this.imageId.length;
-
-      for (let i = 0; i < this.gallerySize; i++) {
-        this.imageInfo[i] = { 'id': this.imageId[i].value, 'url': this.imageUrl[i].value, 'sort': this.imageSort[i].value };
-      }
-      console.log(this.imageInfo);
-      console.log(JSON.stringify(this.imageInfo));
-
-    }, (err) => {
     });
   }
 
@@ -157,7 +122,7 @@ export class GalleryComponent implements OnInit {
       allowEscapeKey: false,
       allowEnterKey: false,
       title: 'Are you sure you want to save this?',
-      text: 'Please be mindful of the image dimension/size and how it will fit on the gallery page!',
+      text: 'You are about to save the sort order of the photos on your gallery page!',
       type: 'question',
       showCancelButton: true,
       showLoaderOnConfirm: true,
@@ -172,32 +137,22 @@ export class GalleryComponent implements OnInit {
         });
       },
     }).then(() => {
+      this.pageLoading = true;
       this.imageId = document.getElementsByClassName('imageId');
       this.imageUrl = document.getElementsByClassName('imageUrl');
       this.imageSort = document.getElementsByClassName('imageSort');
       this.gallerySize = this.imageId.length;
+      this.imageList = [];
+
 
       for (let i = 0; i < this.gallerySize; i++) {
-        this.imageInfo[i] = { 'id': this.imageId[i].value, 'url': this.imageUrl[i].value, 'sort': this.imageSort[i].value };
+        this.imageList[i] = { 'id': this.imageId[i].value, 'url': this.imageUrl[i].value, 'sort': i };
       }
+      this.imageList[this.imageId.length] = { 'id': sessionStorage.user_id, 'url': sessionStorage.token, 'sort': 1 };
 
-      this.bannerLoading = true;
-      const formData = new FormData();
-      formData.append('imageInfo', JSON.stringify(this.imageInfo));
-      formData.append('user_id', sessionStorage.user_id);
-      formData.append('token', sessionStorage.token);
-      formData.append('type', 'sort');
-
-      console.log(this.imageInfo);
-      console.log(JSON.stringify(this.imageInfo));
-      this.authService.postDataFile(formData, 'galleryFileUpload.php').then((result) => {
+      this.authService.postData(this.imageList, 'galleryPageSortSave').then((result) => {
         this.responseData = result;
-        console.log(this.responseData.imageArray);
-        console.log(this.responseData.imageSort);
-        console.log(this.responseData.imageId);
-        console.log(this.responseData.galleryInfoArray);
-        console.log(this.responseData.gallerySize);
-        console.log(this.responseData.testTrue);
+        this.pageLoading = false;
       }, (err) => {
       });
 
@@ -209,7 +164,7 @@ export class GalleryComponent implements OnInit {
           'You didn\'t save anything!',
           'error'
         );
-        this.bannerLoading = false;
+        this.pageLoading = false;
       }
     });
   }
@@ -235,7 +190,7 @@ export class GalleryComponent implements OnInit {
         });
       },
     }).then(() => {
-      this.bannerLoading = true;
+      this.pageLoading = true;
       const formData = new FormData();
       formData.append('image_data', event.target.files[0]);
       formData.append('user_id', sessionStorage.user_id);
@@ -244,9 +199,8 @@ export class GalleryComponent implements OnInit {
 
       this.authService.postDataFile(formData, 'galleryFileUpload.php').then((result) => {
         this.responseData = result;
-        this.bannerLoading = false;
-        const response = result;
-        this.bannerImagePath.push(this.responseData.image_data);
+        this.pageLoading = false;
+        this.bannerImagePath.unshift(this.responseData.image_data);
         if (this.responseData.msg === 'success') {
           this.notification.showNotification('success');
         } else {
@@ -263,7 +217,7 @@ export class GalleryComponent implements OnInit {
           'You didn\'t upload anything!',
           'error'
         );
-        this.bannerLoading = false;
+        this.pageLoading = false;
       }
     });
   }

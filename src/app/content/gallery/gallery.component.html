@@ -1,3 +1,4 @@
+<ngx-loading [show]="pageLoading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
 <div class="main-content">
   <div class="container-fluid">
 
@@ -19,21 +20,17 @@
               <label class="btn btn-warning">
                 <input type="file" style="display: none;" onclick="this.value = null" accept="image/*" (change)="uploadFile($event)" /> Upload Gallery Picture
               </label>
-              <div *ngIf="!editOrder">
-                <button class="btn btn-danger" (click)="editCheckBox()" style="bottom: 0;">Edit</button>
-              </div>
-              <div *ngIf="editOrder">
+
+
                 <button class="btn btn-danger" (click)="saveSort()">Save</button>
-                <button class="btn btn-danger" (click)="editCheckBox()">Cancel</button>
-              </div>
-              
+
+
 
             </div>
           </div>
           <div class="row">
 
-            <div class='wrapper'>
-              <div class="container card" [dragula]='"bag1"'>
+            <div class='wrapper' [dragula]='"bag1"'>
                 <div class="container col-lg-3 col-md-6 col-sm-12 col-xs-12 grabbable" *ngFor="let image of imageInfo" style="height:380px; width:350px; overflow: hidden;">
                   <div style="height:320px; width:250px; overflow: hidden;">
                     <div class="image-wrap" style="position: absolute; top: 50%; transform: translateY(-50%);">
@@ -48,15 +45,17 @@
                     </div>
 
                     <div *ngIf="editOrder">
-                      <div><input class="form-control" type="number" [(ngModel)]="image.sort" value="{{ image.sort }}" style="bottom: 0;"></div>
+                      <div>
+                        <input class="form-control" type="number" [(ngModel)]="image.sort" value="{{ image.sort }}" style="bottom: 0;">
+                      </div>
                     </div>
 
                     <div *ngIf="!editOrder">
-                      <button class="btn btn-danger" #galleryID id="gallery_{{ image.id }}" class="btn btn-danger" (click)="removeGalleryImage(galleryID)" style="bottom: 0;">Remove</button>
+                      <button class="btn btn-danger" #galleryID id="gallery_{{ image.id }}" class="btn btn-danger" (click)="removeGalleryImage(galleryID)"
+                        style="bottom: 0;">Remove</button>
                     </div>
                   </div>
                 </div>
-              </div>
             </div>
           </div>
         </div>
@@ -68,25 +67,25 @@
 </div>
 
 <script>
-$(document).ready(function() {
-  
-     var imageHeight, wrapperHeight, overlap, container = $('.image-wrap');  
-  
-     function centerImage() {
-         imageHeight = container.find('img').height();
-         wrapperHeight = container.height();
-         overlap = (wrapperHeight - imageHeight) / 2;
-         container.find('img').css('margin-top', overlap);
-     }
-      
-     $(window).on("load resize", centerImage);
-      
-     var el = document.getElementById('wrapper');
-     if (el.addEventListener) {  
-         el.addEventListener("webkitTransitionEnd", centerImage, false); // Webkit event
-         el.addEventListener("transitionend", centerImage, false); // FF event
-         el.addEventListener("oTransitionEnd", centerImage, false); // Opera event
-     }
-  
-});
+  $(document).ready(function () {
+
+    var imageHeight, wrapperHeight, overlap, container = $('.image-wrap');
+
+    function centerImage() {
+      imageHeight = container.find('img').height();
+      wrapperHeight = container.height();
+      overlap = (wrapperHeight - imageHeight) / 2;
+      container.find('img').css('margin-top', overlap);
+    }
+
+    $(window).on("load resize", centerImage);
+
+    var el = document.getElementById('wrapper');
+    if (el.addEventListener) {
+      el.addEventListener("webkitTransitionEnd", centerImage, false); // Webkit event
+      el.addEventListener("transitionend", centerImage, false); // FF event
+      el.addEventListener("oTransitionEnd", centerImage, false); // Opera event
+    }
+
+  });
 </script>
