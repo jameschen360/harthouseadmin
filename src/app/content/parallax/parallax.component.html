@@ -1,3 +1,35 @@
-<p>
-  parallax works!
-</p>
+<ngx-loading [show]="pageLoading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+<div class="main-content">
+  <div class="container-fluid">
+
+    <!-- parallax -->
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="red">
+            <h4 class="title">Page Parallax Image</h4>
+          </div>
+          <div class="card-content table-responsive">
+            <select class="btn btn-warning btn-lg" (change)="changePageImage($event)" style="padding: 15px;">
+              <option value="" disabled>Pick a parallax image page</option>
+              <option value="about" selected>About Us</option>
+              <option value="menu" >Menu</option>
+              <option value="news" >News</option>
+              <option value="cwevent" >C/W Event</option>
+              <option value="reservation" >Reservation</option>
+              <option value="gallery" >Gallery</option>
+              <option value="voucher" >Gift Voucher</option>
+              <option value="contactUs" >Contact Us</option>
+            </select>
+            <div class="text-center col-md-12" *ngIf="imageIsSet">
+              <img src="{{ imageURL }}" alt="Avatar" width=400 height="400" style="width:100%">
+              <label class="btn btn-danger">
+                  <input type="file" style="display: none;" onclick="this.value = null" accept="image/*" (change)="uploadFile($event)" /> Upload New Image
+                </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+  </div>
+</div>
