@@ -7,7 +7,7 @@ import { Headers, Http } from '@angular/http';
 @Injectable()
 export class FrontFetchService {
   // PRODUCTION OR SANDBOX DEV
-  setAs: String = 'sandbox'; // production or sandbox
+  setAs: String = 'production'; // production or sandbox
   URL: String;
 
   constructor(public http: Http, public router: Router) {

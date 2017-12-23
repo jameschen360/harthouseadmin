@@ -13,7 +13,7 @@ export class LoginService {
   user_id: string;
   responseData;
   errorLoginMsg = false;
-  loginAPIURI = 'https://harthousewineandtapa.com/ngtest/login/';
+  loginAPIURI = 'https://harthousewineandtapa.com/angularServices/login/';
   returnUrl: string;
   isLoggedIn;
   constructor(public http: Http,
